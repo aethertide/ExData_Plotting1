@@ -12,10 +12,15 @@ raw$DateTime = strptime(paste(raw$Date, raw$Time), "%Y-%m-%d %H:%M:%S")
 
 
 #open the PNG File - this is Plot2
-png("plot2.png", width = 480, height = 480, units = "px")
+png("plot3.png", width = 480, height = 480, units = "px")
 
-#Graph the usage
-plot(raw$DateTime, raw$Global_active_power, ylab='Global Active Power (kilowatts)', xlab='', type='l')
+#First open up a plot with Sub_metering_1, then add lines for Sub_metering_2 and Sub_metering_3
+plot(raw$DateTime, raw$Sub_metering_1, ylab='Energy sub metering', xlab='', type='l')
+lines(x=raw$DateTime,y=raw$Sub_metering_2, type="l",col="red")
+lines(x=raw$DateTime,y=raw$Sub_metering_3, type="l",col="blue")
+
+#time to build the legend
+legend("topright",c("Sub_metering_1","Sub_metering_2", "Sub_metering_3"),lty=c(1,1,1),lwd=c(2.5,2.5,2.5),col=c("black","blue","red"))
 
 #close the PNG file.
 dev.off()
